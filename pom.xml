@@ -14,6 +14,7 @@
   <!-- FIXME change it to the project's website -->
   <url>https://www.sergiocuacor.com</url>
 
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
@@ -48,13 +49,7 @@
   </dependencies>
 
   <build>
-    <extensions>
-      <extension>
-        <groupId>org.apache.maven.archetype</groupId>
-        <artifactId>archetype-packaging</artifactId>
-        <version>3.0.1</version>
-      </extension>
-    </extensions>
+
     <pluginManagement>
       <plugins>
         <plugin>
@@ -66,8 +61,7 @@
       </plugins>
     </pluginManagement>
   </build>
-  <modules>
-
-    <module>customer</module>
-  </modules>
+<modules>
+  <module>customer</module>
+</modules>
 </project>
