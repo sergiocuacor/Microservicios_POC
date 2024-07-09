@@ -5,3 +5,4 @@ public record CustomerRegistrationRequest(String firstName, String lastName, Str
 
 
 }
+// Utilizada para realizar las peticiones HTTP para la creacion nuevos customers

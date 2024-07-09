@@ -1,38 +1,38 @@
-services:
-  postgres:
+services: #Define los servicios (contenedores) que se van a crear.
+  postgres: # Contenedor postgres
     container_name: postgres
-    image: postgres
+    image: postgres # imagen oficial de PostgreSQL
     environment:
       POSTGRES_USER: sergiocuacor
       POSTGRES_PASSWORD: password
-      PGDATA: /data/postgres
+      PGDATA: /data/postgres # ubicación de los datos de PostgreSQL
     volumes:
-      - postgres:/data/postgres
+      - postgres:/data/postgres #montamos un volumen dentro del contenedor
     ports:
-      - "5432:5432"
+      - "5432:5432" #Mapeamos el puerto 5432 del contenedor al puerto 5432 del host
     networks:
-      - postgres
-    restart: unless-stopped
+      - postgres #Conectamos el contenedor a la red "postgres"
+    restart: unless-stopped #Reinicio automático a menos que lo detengamos manualmente
 
   pgadmin:
     container_name: pgadmin
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4 #imagen oficial de pgAdmin4
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
       PGADMIN_CONFIG_SERVER_MODE: 'False'
     volumes:
-      - pgadmin:/var/lib/pgadmin
+      - pgadmin:/var/lib/pgadmin #montamos un volumen dentro del contenedor
     ports:
-      - "5050:80"
+      - "5050:80" # Mapeamos el puerto 80 del contenedor al puerto 5050 del host
     networks:
-      - postgres
+      - postgres #conectamos el contenedor pgadmin a la red postgres
     restart: unless-stopped
 
-networks:
+networks: ## Definimos una red llamada postgres usando el driver de red "bridge"
   postgres:
     driver: bridge
 
-volumes:
+volumes: ## Definimos los dos volúmenes: "postgres" y "pgadmin"
   postgres:
   pgadmin:
