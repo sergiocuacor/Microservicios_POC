@@ -1,16 +1,17 @@
 package com.sergiocuacor.microservices.fraud;
 
-import lombok.AllArgsConstructor;
+
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("api/v1/fraud-check")
 public class FraudController {
 
     private final FraudCheckService fraudCheckService;
 
-
+    public FraudController(FraudCheckService fraudCheckService){
+        this.fraudCheckService= fraudCheckService;
+    }
 
     @GetMapping(path = "{customerId}")
     public FraudCheckResponse isFraudster(@PathVariable("customerId") Integer customerId){
