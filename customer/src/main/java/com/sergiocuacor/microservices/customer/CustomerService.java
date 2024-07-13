@@ -3,7 +3,7 @@ package com.sergiocuacor.microservices.customer;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomerService{
+public class CustomerService {
 
     private final CustomerRepository customerRepository;
 
@@ -11,7 +11,7 @@ public class CustomerService{
         this.customerRepository = customerRepository;
     }
 
-    public void registerCustomer(CustomerRegistrationRequest request){
+    public void registerCustomer(CustomerRegistrationRequest request) {
         Customer customer = Customer.builder()
                 .firstName(request.firstName())
                 .lastName(request.lastName())

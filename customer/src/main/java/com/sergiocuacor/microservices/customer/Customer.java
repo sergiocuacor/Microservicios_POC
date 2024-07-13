@@ -22,7 +22,7 @@ public class Customer {
     private String lastName;
     private String email;
 
-    public Customer(){
+    public Customer() {
 
     }
 
@@ -81,7 +81,7 @@ public class Customer {
         return new CustomerBuilder();
     }
 
-    public static class CustomerBuilder{
+    public static class CustomerBuilder {
         private Long id;
         private String firstName;
         private String lastName;
