@@ -1,14 +1,22 @@
 package com.sergiocuacor.microservices.customer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class CustomerService {
 
-    private final CustomerRepository customerRepository;
+    private static final Logger logger = LoggerFactory.getLogger(CustomerService.class);
 
-    public CustomerService(CustomerRepository customerRepository) {
+
+    private final CustomerRepository customerRepository;
+    private final RestTemplate restTemplate;
+
+    public CustomerService(CustomerRepository customerRepository, RestTemplate restTemplate) {
         this.customerRepository = customerRepository;
+        this.restTemplate = restTemplate;
     }
 
     public void registerCustomer(CustomerRegistrationRequest request) {
@@ -18,10 +26,26 @@ public class CustomerService {
                 .email(request.email())
                 .build();
 
+        customerRepository.saveAndFlush(customer);
+        logger.info("Customer saved to DB: {}", customer);
+
         //TODO: Checkear si el email es válido
         //TODO: Checkear si el email no está en uso
         //TODO: Guardar customer en bd
+        //TODO: Checkear si el customer es fraudulento
+        logger.info("Attempting fraud check for customer ID: {}", customer.getId());
+        FraudCheckResponse fraudCheckResponse =  restTemplate.getForObject(
+                "http://localhost:8081/api/v1/fraud-check/{customerId}",
+                    FraudCheckResponse.class,
+                customer.getId()
+                );
+        logger.info("Fraud check response: {}", fraudCheckResponse);
+        if(fraudCheckResponse.getIsFraudster()&& fraudCheckResponse != null){
+            throw new IllegalStateException("fraudster");
+        }
 
-        customerRepository.save(customer);
+        logger.info("Customer registration completed successfully");
+        //TODO: Enviar notificación
+
     }
 }

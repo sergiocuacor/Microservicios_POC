@@ -1,4 +1,4 @@
-package com.sergiocuacor.microservices.fraud;
+package com.sergiocuacor.microservices.customer;
 
 import java.util.Objects;
 
