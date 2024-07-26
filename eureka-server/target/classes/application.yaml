@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: eureka-server
+server:
+  port: 8761
+eureka:
+  client:
+    fetch-registry: false # Como va a ser el único server (standalone) le decimos que no intente obtener informacion de otros servidores
+    register-with-eureka: false
