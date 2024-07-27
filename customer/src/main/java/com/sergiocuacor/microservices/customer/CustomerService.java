@@ -35,10 +35,10 @@ public class CustomerService {
         //TODO: Checkear si el customer es fraudulento
         logger.info("Attempting fraud check for customer ID: {}", customer.getId());
         FraudCheckResponse fraudCheckResponse =  restTemplate.getForObject(
-                "http://localhost:8081/api/v1/fraud-check/{customerId}",
+                "http://FRAUD/api/v1/fraud-check/{customerId}",
                     FraudCheckResponse.class,
                 customer.getId()
-                );
+                ); // Gracias al service discovery de Eureka podemos quitar el puerto del localhost y poner solo el nombre del microservicio (localhost:8081 por FRAUD)
         logger.info("Fraud check response: {}", fraudCheckResponse);
         if(fraudCheckResponse.getIsFraudster()&& fraudCheckResponse != null){
             throw new IllegalStateException("fraudster");
