@@ -27,7 +27,7 @@ public class Customer {
     }
 
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
