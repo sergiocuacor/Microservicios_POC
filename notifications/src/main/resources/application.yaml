@@ -1,0 +1,17 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: notifications
+  datasource:
+    username: sergiocuacor
+    password: password
+    url: jdbc:postgresql://localhost:5432/notifications
+  jpa:
+    hibernate:
+      ddl-auto: create-drop # Se borrará cada vez que la sesión finalice.
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true

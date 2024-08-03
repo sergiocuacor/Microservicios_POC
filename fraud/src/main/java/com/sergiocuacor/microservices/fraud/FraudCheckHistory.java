@@ -5,64 +5,19 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
-@Entity
-public class FraudCheckHistory {
+@Entity // Entidad JPA
+public class FraudCheckHistory { // Historial de verificaciones de fraude
+    /*
+    @Id para marcar id como PK,
+    @SequenceGenerator y @GeneratedValue para configurar
+    la generación automática de IDs usando una secuencia de base de datos. */
     @Id
-    @SequenceGenerator(
-            name = "fraud_id_sequence",
-            sequenceName = "fraud_id_sequence"
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "fraud_id_sequence"
-    )
+    @SequenceGenerator(name = "fraud_id_sequence", sequenceName = "fraud_id_sequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fraud_id_sequence")
     private Integer id;
     private Integer customerId;
     private boolean isFraudster;
     private LocalDateTime createdAt;
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public boolean isFraudster() {
-        return isFraudster;
-    }
-
-    public Integer getCustomerId() {
-        return customerId;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
-    }
-
-    public void setFraudster(boolean fraudster) {
-        isFraudster = fraudster;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    @Override
-    public String toString() {
-        return "FraudCheckHistory{" +
-                "id=" + id +
-                ", customerId=" + customerId +
-                ", isFraudster=" + isFraudster +
-                ", createdAt=" + createdAt +
-                '}';
-    }
-
 
     public FraudCheckHistory(Integer id, Integer customerId, boolean isFraudster, LocalDateTime createdAt) {
         this.id = id;
@@ -73,6 +28,12 @@ public class FraudCheckHistory {
 
     public FraudCheckHistory() {
 
+    }
+
+
+    @Override
+    public String toString() {
+        return "FraudCheckHistory{" + "id=" + id + ", customerId=" + customerId + ", isFraudster=" + isFraudster + ", createdAt=" + createdAt + '}';
     }
 
 
@@ -112,5 +73,37 @@ public class FraudCheckHistory {
         public FraudCheckHistory build() {
             return new FraudCheckHistory(id, customerId, isFraudster, createdAt);
         }
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public boolean isFraudster() {
+        return isFraudster;
+    }
+
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
+
+    public void setFraudster(boolean fraudster) {
+        isFraudster = fraudster;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

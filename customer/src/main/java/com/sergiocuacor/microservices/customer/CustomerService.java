@@ -36,7 +36,7 @@ public class CustomerService {
 
         FraudCheckResponse fraudCheckResponse = fraudClient.isFraudster(customer.getId());
 
-        if(fraudCheckResponse.isFraudster()&& fraudCheckResponse != null){
+        if(fraudCheckResponse.isFraudster()){
             throw new IllegalStateException("fraudster");
         }
 

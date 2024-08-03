@@ -17,7 +17,7 @@ public class Customer {
             strategy = GenerationType.SEQUENCE,
             generator = "customer_id_sequence"
     )
-    private Long id;
+    private Integer id;
     private String firstName;
     private String lastName;
     private String email;
@@ -43,7 +43,7 @@ public class Customer {
         return email;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -82,7 +82,7 @@ public class Customer {
     }
 
     public static class CustomerBuilder {
-        private Long id;
+        private Integer id;
         private String firstName;
         private String lastName;
         private String email;
@@ -90,7 +90,7 @@ public class Customer {
         CustomerBuilder() {
         }
 
-        public CustomerBuilder id(Long id) {
+        public CustomerBuilder id(Integer id) {
             this.id = id;
             return this;
         }
