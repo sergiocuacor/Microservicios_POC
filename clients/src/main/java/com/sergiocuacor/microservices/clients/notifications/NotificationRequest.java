@@ -1,4 +1,4 @@
-package com.sergiocuacor.microservices.notifications;
+package com.sergiocuacor.microservices.clients.notifications;
 
 public class NotificationRequest {
     private Integer toCustomerId;

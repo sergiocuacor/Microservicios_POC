@@ -22,11 +22,20 @@ public class Notification {
     private String message;
     private LocalDateTime sendAt;
 
-    public Notification(){
+    public Notification() {
 
     }
 
-    private Notification(NotificationBuilder builder){
+    public Notification(Integer notificationId, Integer toCustomerId, String toCustomerEmail, String sender, String message, LocalDateTime sendAt) {
+        this.notificationId = notificationId;
+        this.toCustomerId = toCustomerId;
+        this.toCustomerEmail = toCustomerEmail;
+        this.sender = sender;
+        this.message = message;
+        this.sendAt = sendAt;
+    }
+
+    private Notification(NotificationBuilder builder) {
         this.notificationId = builder.notificationId;
         this.toCustomerId = builder.toCustomerId;
         this.toCustomerEmail = builder.toCustomerEmail;
@@ -96,7 +105,7 @@ public class Notification {
                 '}';
     }
 
-    public static NotificationBuilder builder(){
+    public static NotificationBuilder builder() {
         return new NotificationBuilder();
     }
 
@@ -108,7 +117,7 @@ public class Notification {
         private String message;
         private LocalDateTime sendAt;
 
-        public NotificationBuilder(){
+        public NotificationBuilder() {
 
         }
 
@@ -121,18 +130,22 @@ public class Notification {
             this.toCustomerId = toCustomerId;
             return this;
         }
+
         public NotificationBuilder toCustomerEmail(String toCustomerEmail) {
             this.toCustomerEmail = toCustomerEmail;
             return this;
         }
+
         public NotificationBuilder sender(String sender) {
             this.sender = sender;
             return this;
         }
+
         public NotificationBuilder message(String message) {
             this.message = message;
             return this;
         }
+
         public NotificationBuilder sendAt(LocalDateTime sendAt) {
             this.sendAt = sendAt;
             return this;
