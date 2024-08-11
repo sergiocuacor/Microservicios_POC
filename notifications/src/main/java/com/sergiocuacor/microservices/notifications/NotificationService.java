@@ -27,7 +27,7 @@ public class NotificationService {
                         .toCustomerEmail(notificationRequest.getToCustomerEmail())
                         .sender("Sergiocuacor")
                         .message(notificationRequest.getMessage())
-                        .sendAt(LocalDateTime.now())
+                        .sentAt(LocalDateTime.now())
                         .build()
         );
     }

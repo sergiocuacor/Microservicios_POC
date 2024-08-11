@@ -20,19 +20,19 @@ public class Notification {
     private String toCustomerEmail;
     private String sender;
     private String message;
-    private LocalDateTime sendAt;
+    private LocalDateTime sentAt;
 
     public Notification() {
 
     }
 
-    public Notification(Integer notificationId, Integer toCustomerId, String toCustomerEmail, String sender, String message, LocalDateTime sendAt) {
+    public Notification(Integer notificationId, Integer toCustomerId, String toCustomerEmail, String sender, String message, LocalDateTime sentAt) {
         this.notificationId = notificationId;
         this.toCustomerId = toCustomerId;
         this.toCustomerEmail = toCustomerEmail;
         this.sender = sender;
         this.message = message;
-        this.sendAt = sendAt;
+        this.sentAt = sentAt;
     }
 
     private Notification(NotificationBuilder builder) {
@@ -41,7 +41,7 @@ public class Notification {
         this.toCustomerEmail = builder.toCustomerEmail;
         this.sender = builder.sender;
         this.message = builder.message;
-        this.sendAt = builder.sendAt;
+        this.sentAt = builder.sentAt;
 
     }
 
@@ -85,12 +85,12 @@ public class Notification {
         this.message = message;
     }
 
-    public LocalDateTime getSendAt() {
-        return sendAt;
+    public LocalDateTime getSentAt() {
+        return sentAt;
     }
 
-    public void setSendAt(LocalDateTime sendAt) {
-        this.sendAt = sendAt;
+    public void setSentAt(LocalDateTime sentAt) {
+        this.sentAt = sentAt;
     }
 
     @Override
@@ -101,7 +101,7 @@ public class Notification {
                 ", toCustomerEmail='" + toCustomerEmail + '\'' +
                 ", sender='" + sender + '\'' +
                 ", message='" + message + '\'' +
-                ", sendAt=" + sendAt +
+                ", setdAt=" + sentAt +
                 '}';
     }
 
@@ -115,7 +115,7 @@ public class Notification {
         private String toCustomerEmail;
         private String sender;
         private String message;
-        private LocalDateTime sendAt;
+        private LocalDateTime sentAt;
 
         public NotificationBuilder() {
 
@@ -146,8 +146,8 @@ public class Notification {
             return this;
         }
 
-        public NotificationBuilder sendAt(LocalDateTime sendAt) {
-            this.sendAt = sendAt;
+        public NotificationBuilder sentAt(LocalDateTime sentAt) {
+            this.sentAt = sentAt;
             return this;
         }
 
