@@ -29,6 +29,11 @@ services: #Define los servicios (contenedores) que se van a crear.
       - postgres #conectamos el contenedor pgadmin a la red postgres
     restart: unless-stopped
 
+  zipkin:
+    image: ghcr.io/openzipkin/zipkin-slim:${TAG:-latest}
+    container_name: zipkin
+    ports:
+      - "9411:9411"
 networks: ## Definimos una red llamada postgres usando el driver de red "bridge"
   postgres:
     driver: bridge
