@@ -7,3 +7,23 @@ eureka:
   client:
     fetch-registry: false # Como va a ser el único server (standalone) le decimos que no intente obtener informacion de otros servidores
     register-with-eureka: false
+# Micrometer tracing config
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+    baggage:
+      remote-fields: x-request-id
+      correlation:
+        fields: x-request-id
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+  level:
+    io.micrometer.tracing: debug
+    org.springframework.cloud.openfeign: DEBUG
+

@@ -23,3 +23,7 @@ management:
 logging:
   pattern:
     level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+  level:
+    io.micrometer.tracing: debug
+    org.springframework.cloud.openfeign: DEBUG
+
