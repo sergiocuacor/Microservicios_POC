@@ -21,3 +21,19 @@ eureka:
       defaultZone: http://localhost:8761/eureka
     fetch-registry: true
     register-with-eureka: true
+# Micrometer tracing config
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+    baggage:
+      remote-fields: x-request-id
+      correlation:
+        fields: x-request-id
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
