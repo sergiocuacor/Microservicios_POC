@@ -34,6 +34,12 @@ services: #Define los servicios (contenedores) que se van a crear.
     container_name: zipkin
     ports:
       - "9411:9411"
+  rabbitmq:
+    image: rabbitmq:3.12.14-management-alpine
+    container_name: rabbitmq
+    ports:
+      - "5672:5672" #default port for RabbitMQ
+      - "15672:15672" #default port to access the UI, username and password is 'guest'
 networks: ## Definimos una red llamada postgres usando el driver de red "bridge"
   postgres:
     driver: bridge
