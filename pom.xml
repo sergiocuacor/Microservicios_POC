@@ -88,5 +88,6 @@
     <module>clients</module>
     <module>notifications</module>
   <module>api-gateway</module>
+    <module>amqp</module>
 </modules>
 </project>
