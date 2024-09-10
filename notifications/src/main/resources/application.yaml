@@ -40,4 +40,10 @@ logging:
   level:
     io.micrometer.tracing: debug
     org.springframework.cloud.openfeign: DEBUG
-
+rabbitmq:
+  exchanges:
+    internal: internal.exchange
+  queue:
+    notification: notification.queue
+  routing-keys:
+    internal-notification: internal.notification.routing-key
