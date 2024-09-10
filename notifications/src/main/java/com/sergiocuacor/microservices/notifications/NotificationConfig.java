@@ -1,12 +1,27 @@
 package com.sergiocuacor.microservices.notifications;
 
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.TopicExchange;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class NotificationConfig {
-    /* This class reads RabbitMQ exchanges, queue and routing keys from
-    application.yaml and creates the RabbitMQ objects.*/
+    /*
+    This class reads RabbitMQ config from
+    application.yaml and creates the RabbitMQ objects.
+    We also need to define 3 beans: TopicExchange, Queue and Binding
+    - TopicExchange to create an exchange, the point where producers send messages in RabbitMQ.
+    - Queue to create a queue where the messages will be stored
+    - Binding defines HOW the messages flow from the exchange to the queue.
+    ** Binding expanded:
+    1. When a message arrives at an exchange, RabbitMQ uses the binding to determine which queue(s) should receive the message.
+    2. The routing key of the message is compared against the routing key in the binding.
+    3. If they match (according to the exchange type rules), the message is routed to the bound queue.
+    */
     @Value("${rabbitmq.exchanges.internal}")
     private String internalExchange;
 
@@ -15,6 +30,19 @@ public class NotificationConfig {
 
     @Value("${rabbitmq.routing-keys.internal-notification}")
     private String internalNotificationRoutingKeys;
+
+    @Bean
+    public TopicExchange internalTopicExchange() {
+        return new TopicExchange(this.internalExchange);
+    }
+    @Bean
+    public Queue notificationQueue() {
+        return new Queue(this.notificationQueue);
+    }
+    @Bean
+    public Binding internalToNotificationBinding(){
+        return BindingBuilder.bind(notificationQueue()).to(internalTopicExchange()).with(this.internalNotificationRoutingKeys);
+    }
 
     public String getInternalExchange() {
         return internalExchange;
