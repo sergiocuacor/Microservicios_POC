@@ -83,7 +83,7 @@
   </build>
 <modules>
   <module>customer</module>
-    <module>fraud</module>
+    <module>verifier</module>
   <module>eureka-server</module>
     <module>clients</module>
     <module>notifications</module>

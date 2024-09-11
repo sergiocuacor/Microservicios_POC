@@ -1,15 +1,15 @@
 server:
-  port: 8082
+  port: 8081
 spring:
   application:
-    name: notifications
+    name: verifier
   datasource:
     username: sergiocuacor
     password: password
-    url: jdbc:postgresql://localhost:5432/notifications
+    url: jdbc:postgresql://localhost:5432/verifier # Nombre de la BD a la que nos tenemos que conectar
   jpa:
     hibernate:
-      ddl-auto: create-drop # Se borrará cada vez que la sesión finalice.
+      ddl-auto: create-drop
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -40,10 +40,4 @@ logging:
   level:
     io.micrometer.tracing: debug
     org.springframework.cloud.openfeign: DEBUG
-rabbitmq:
-  exchanges:
-    internal: internal.exchange
-  queue:
-    notification: notification.queue
-  routing-keys:
-    internal-notification: internal.notification.routing-key
+

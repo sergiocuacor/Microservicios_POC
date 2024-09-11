@@ -12,8 +12,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="clients" />
-        <module name="fraud" />
         <module name="amqp" />
+        <module name="verifier" />
         <module name="api-gateway" />
         <module name="eureka-server" />
         <module name="notifications" />

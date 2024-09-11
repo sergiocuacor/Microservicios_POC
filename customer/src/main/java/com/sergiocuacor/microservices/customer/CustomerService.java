@@ -1,7 +1,8 @@
 package com.sergiocuacor.microservices.customer;
 
-import com.sergiocuacor.microservices.clients.fraud.FraudCheckResponse;
-import com.sergiocuacor.microservices.clients.fraud.FraudClient;
+
+import com.sergiocuacor.microservices.clients.verifier.VerifierCheckResponse;
+import com.sergiocuacor.microservices.clients.verifier.VerifierClient;
 import com.sergiocuacor.microservices.clients.notifications.NotificationClient;
 import com.sergiocuacor.microservices.clients.notifications.NotificationRequest;
 import org.slf4j.Logger;
@@ -16,13 +17,13 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
     private final RestTemplate restTemplate;
-    private final FraudClient fraudClient;
+    private final VerifierClient verifierClient;
     private final NotificationClient notificationClient;
 
-    public CustomerService(CustomerRepository customerRepository, RestTemplate restTemplate, FraudClient fraudClient, NotificationClient notificationClient) {
+    public CustomerService(CustomerRepository customerRepository, RestTemplate restTemplate, VerifierClient verifierClient, NotificationClient notificationClient) {
         this.customerRepository = customerRepository;
         this.restTemplate = restTemplate;
-        this.fraudClient = fraudClient;
+        this.verifierClient = verifierClient;
         this.notificationClient = notificationClient;
     }
 
@@ -35,10 +36,10 @@ public class CustomerService {
 
         customerRepository.saveAndFlush(customer);
 
-        FraudCheckResponse fraudCheckResponse = fraudClient.isFraudster(customer.getId());
+        VerifierCheckResponse verifierCheckResponse = verifierClient.isValid(customer.getId());
 
-        if (fraudCheckResponse.isFraudster()) {
-            throw new IllegalStateException("fraudster");
+        if (!verifierCheckResponse.isValid()) {
+            throw new IllegalStateException("Customer didn't pass the verifier check");
         }
 
         notificationClient.sendNotification(
